@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  color: primary-500;
-  background: secondary-500;
+* {
+  font-weight: 500;
+}
+
+@layer components {
+  .responsive {
+    @apply w-full;
+  }
+  .responsive_wrapper {
+    @apply w-full max-w-[1148px] mx-auto my-0 px-6;
+  }
+
+  .search-bar {
+    @apply px-3 py-2 placeholder-slate-2 rounded-xl w-60 bg-gray-0;
+  }
 }
