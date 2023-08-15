@@ -19,6 +19,20 @@
   }
 
   .box-style {
-    @apply p-4 rounded-3xl bg-gray-0 overflow-hidden;
+    @apply p-4 rounded-3xl bg-gray-1 overflow-hidden;
+  }
+
+  /*** CATEGORY COMPONENT ***/
+  .category-cards {
+    @apply relative flex justify-center items-center m-2 w-full;
+  }
+  .category-cards_image {
+    @apply object-cover transition ease-in-out duration-700 z-10;
+  }
+  .category-cards_title {
+    @apply absolute text-3xl font-black text-gray-0 text-center drop-shadow-lg transition ease-in-out duration-700 z-10;
+  }
+  .category-cards_text {
+    @apply text-xl font-light text-center transition ease-in-out translate-y-12 scale-125 duration-500;
   }
 }
