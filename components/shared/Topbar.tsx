@@ -48,7 +48,7 @@ export default function Topbar() {
               <CiShoppingCart size={25} />
               <PiHeartLight size={20} />
             </span>
-            <span className="relative">
+            <Link href={"/sign-in"} className="relative">
               <Image
                 src={"/assets/IMG/avatar.jpg"}
                 alt="Hello"
@@ -56,7 +56,7 @@ export default function Topbar() {
                 height={50}
                 className="rounded-full w-9 h-9 object-cover"
               />
-            </span>
+            </Link>
           </div>
         </section>
       </span>
