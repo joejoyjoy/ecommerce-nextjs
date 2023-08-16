@@ -2,7 +2,7 @@ import { checkUser } from "@/lib/actions/user.actions";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-export default function UserProvider({ children }: any) {
+export default function AuthProvider({ children }: any) {
   const { data: session } = useSession();
   
   useEffect(() => {

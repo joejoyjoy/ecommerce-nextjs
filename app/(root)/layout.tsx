@@ -7,7 +7,7 @@ import Topbar from "@/components/shared/Topbar";
 import "../globals.css";
 import { SessionProvider } from "next-auth/react";
 import Component from "@/components/Login-btn";
-import UserProvider from "./_app";
+import AuthProvider from "../api/auth/authProvider";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <SessionProvider>
-      <UserProvider>
+      <AuthProvider>
         <html lang="en">
           <body className={`${montserrat.className} bg-gray-3`}>
             <Topbar />
@@ -31,7 +31,7 @@ export default function RootLayout({
             <Component />
           </body>
         </html>
-      </UserProvider>
+      </AuthProvider>
     </SessionProvider>
   );
 }
