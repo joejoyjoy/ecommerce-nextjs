@@ -34,7 +34,7 @@ const userSchema = new Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: 'timesSignedIn' }
 );
 
 const User = models.User || mongoose.model("User", userSchema);
