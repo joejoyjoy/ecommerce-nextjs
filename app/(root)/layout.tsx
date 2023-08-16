@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Topbar from "@/components/shared/Topbar";
 import "../globals.css";
+import { SessionProvider } from "next-auth/react";
+import Component from "@/components/Login-btn";
+import UserProvider from "./_app";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -17,11 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${montserrat.className} bg-gray-3`}>
-        <Topbar />
-        {children}
-      </body>
-    </html>
+    <SessionProvider>
+      <UserProvider>
+        <html lang="en">
+          <body className={`${montserrat.className} bg-gray-3`}>
+            <Topbar />
+            {children}
+            <Component />
+          </body>
+        </html>
+      </UserProvider>
+    </SessionProvider>
   );
 }
