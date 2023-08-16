@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { checkUser } from "@/lib/actions/user.actions";
+import formatToISOString from "@/utils/formatToISOString";
 
 type InitialState = {
   value: AuthState;
@@ -50,10 +51,11 @@ export const logInAsync = createAsyncThunk(
 export const auth = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(logInAsync.fulfilled, (state, action) => {
+      action.payload.updatedAt = formatToISOString(action.payload.updatedAt);
+      action.payload.createdAt = formatToISOString(action.payload.createdAt);
       state.value = action.payload;
     });
   },
