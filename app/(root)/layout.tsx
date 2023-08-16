@@ -1,14 +1,9 @@
-"use client";
-
 import React from "react";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Topbar from "@/components/shared/Topbar";
+import ClientComponent from "./clientComponent";
 import "../globals.css";
-import { SessionProvider } from "next-auth/react";
-import Component from "@/components/Login-btn";
-import AuthProvider from "../api/auth/authProvider";
-import { ReduxProvider } from "@/redux/providers";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -23,18 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ReduxProvider>
-      <SessionProvider>
-        <AuthProvider>
-          <html lang="en">
-            <body className={`${montserrat.className} bg-gray-3`}>
-              <Topbar />
-              {children}
-              <Component />
-            </body>
-          </html>
-        </AuthProvider>
-      </SessionProvider>
-    </ReduxProvider>
+    <ClientComponent>
+      <html lang="en">
+        <body className={`${montserrat.className} bg-gray-3`}>
+          <Topbar />
+          {children}
+        </body>
+      </html>
+    </ClientComponent>
   );
 }
