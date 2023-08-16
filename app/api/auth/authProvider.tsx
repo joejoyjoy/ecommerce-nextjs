@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { authState, noAuthFound } from "@/redux/features/auth.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/redux/store";
@@ -13,8 +13,7 @@ export default function AuthProvider({
 }) {
   const { data: session } = useSession();
   const dispatch = useDispatch<AppDispatch>();
-  const { value } = useSelector((store: any) => store.authReducer);
-  const [isLoading, setIsLoading] = useState(true);
+  const { value, isLoading } = useSelector((store: any) => store.authReducer);
 
   if (!isLoading) {
     console.log(value);
@@ -24,7 +23,6 @@ export default function AuthProvider({
     if (session) {
       const { name, email, image }: any = session.user;
       dispatch(authState({ name, email, image }));
-      setIsLoading(false);
     } else {
       dispatch(noAuthFound());
     }

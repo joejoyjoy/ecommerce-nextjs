@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { checkUser } from "@/lib/actions/user.actions";
-import formatToISOString from "@/utils/formatToISOString";
 
 type InitialState = {
   value: AuthState;
+  isLoading: boolean;
 };
 
 type AuthState = {
@@ -34,6 +34,7 @@ const initialState = {
     updatedAt: "",
     timesSignedIn: 0,
   } as AuthState,
+  isLoading: true,
 } as InitialState;
 
 export const authState = createAsyncThunk(
@@ -58,6 +59,7 @@ export const auth = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(authState.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.value = action.payload;
     });
   },
