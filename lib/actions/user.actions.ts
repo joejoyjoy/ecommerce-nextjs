@@ -16,8 +16,8 @@ export async function checkUser({ name, email, image }: Props) {
     const user = await User.findOne({ email });
 
     if (user) {
-      await updateUserLastSingIn(user)
-      return user;
+      await updateUserLastSingIn(user);
+      return JSON.parse(JSON.stringify(user));
     }
 
     await User.create({
@@ -25,13 +25,15 @@ export async function checkUser({ name, email, image }: Props) {
       email,
       image,
     });
+
+    const newUser = await User.findOne({ email });
+
+    return JSON.parse(JSON.stringify(newUser));
   } catch (error: any) {
     throw new Error(
       `Failed to create/update user by checkUser Fn(): ${error.message}`
     );
   }
-
-  return checkUser;
 }
 
 export async function updateUserLastSingIn(user: any) {

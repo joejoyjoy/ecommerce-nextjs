@@ -36,8 +36,8 @@ const initialState = {
   } as AuthState,
 } as InitialState;
 
-export const logInAsync = createAsyncThunk(
-  "auth/logInAsync",
+export const authState = createAsyncThunk(
+  "auth/authState",
   async ({ name, email, image }: any) => {
     const response = await checkUser({
       name,
@@ -51,14 +51,17 @@ export const logInAsync = createAsyncThunk(
 export const auth = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    noAuthFound: (state) => {
+      state = initialState;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(logInAsync.fulfilled, (state, action) => {
-      action.payload.updatedAt = formatToISOString(action.payload.updatedAt);
-      action.payload.createdAt = formatToISOString(action.payload.createdAt);
+    builder.addCase(authState.fulfilled, (state, action) => {
       state.value = action.payload;
     });
   },
 });
 
+export const { noAuthFound } = auth.actions;
 export default auth.reducer;
