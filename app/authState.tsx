@@ -6,11 +6,7 @@ import { authState, noAuthFound } from "@/redux/features/auth.slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 
-export default function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AuthState({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -24,5 +20,5 @@ export default function AuthProvider({
     }
   }, [session]);
 
-  return <>{children}</>;
+  return children;
 }

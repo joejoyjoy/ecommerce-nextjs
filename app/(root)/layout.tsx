@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Topbar from "@/components/shared/Topbar";
-import ClientComponent from "./clientComponent";
+import ProvidersComponent from "../providers";
 import "../globals.css";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -18,13 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClientComponent>
+    <ProvidersComponent>
       <html lang="en">
         <body className={`${montserrat.className} bg-gray-3`}>
           <Topbar />
           {children}
         </body>
       </html>
-    </ClientComponent>
+    </ProvidersComponent>
   );
 }

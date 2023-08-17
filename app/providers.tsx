@@ -2,10 +2,10 @@
 
 import React from "react";
 import { SessionProvider } from "next-auth/react";
-import AuthProvider from "../api/auth/authProvider";
+import AuthState from "./authState";
 import { ReduxProvider } from "@/redux/providers";
 
-export default function ClientComponent({
+export default function ProvidersComponent({
   children,
 }: {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function ClientComponent({
   return (
     <ReduxProvider>
       <SessionProvider>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthState>{children}</AuthState>
       </SessionProvider>
     </ReduxProvider>
   );
