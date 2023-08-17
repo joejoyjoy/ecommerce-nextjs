@@ -53,7 +53,7 @@ export default function UserModalCard() {
   return (
     <div className="flex flex-col justify-center relative" ref={popperRef}>
       <button
-        className="w-9 h-9 p-0 rounded-full drop-shadow-md"
+        className="w-9 h-9 p-0 rounded-full drop-shadow-md z-50"
         onClick={() => setPopperOpen(!popperOpen)}
       >
         <Image
