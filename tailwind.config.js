@@ -15,17 +15,32 @@ module.exports = {
         "gray-1": "#FDFDFE",
         "gray-2": "#FBFBFB",
         "gray-3": "#F7F7F7",
+        "gray-03": "#EAEAEA",
         "gray-4": "#ACACAC",
-        "gray-5": "#5F5F5F",
+        "gray-05": "#5F5F5F",
         "gray-5": "#2B2B38",
         "gray-6": "#000000",
         "slate-1": "#858B94",
         "slate-2": "#3B4C60",
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      boxShadow: {
+        '3xl': '0 4px 20px 0 rgb(25 25 34/24%);',
       },
+      animation: {
+        bounce: 'bounce 0.25s'
+      },
+      keyframes: {
+        bounce: {
+          '0%, 100%': {
+            transform: 'none',
+            animationTimingFunction: 'linear',
+          },
+          '50%': {
+            transform: 'translateX(50%)',
+            animationTimingFunction: 'linear',
+          }
+        }
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

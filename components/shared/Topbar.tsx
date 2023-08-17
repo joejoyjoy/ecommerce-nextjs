@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import UserModalCard from "../ui/UserModalCard";
 import { HiOutlineChevronDown } from "react-icons/hi";
 import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import { RiSearch2Line } from "react-icons/ri";
@@ -48,15 +48,7 @@ export default function Topbar() {
               <CiShoppingCart size={25} />
               <PiHeartLight size={20} />
             </span>
-            <Link href={"/sign-in"} className="relative">
-              <Image
-                src={"/assets/IMG/avatar.jpg"}
-                alt="Hello"
-                width={50}
-                height={50}
-                className="rounded-full w-9 h-9 object-cover"
-              />
-            </Link>
+            <UserModalCard />
           </div>
         </section>
       </span>

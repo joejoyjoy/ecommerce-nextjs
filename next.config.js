@@ -19,6 +19,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.neweracap.co.uk",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };

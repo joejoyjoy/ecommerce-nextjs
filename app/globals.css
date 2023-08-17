@@ -35,4 +35,17 @@
   .category-cards_text {
     @apply text-xl font-light text-center transition ease-in-out translate-y-12 scale-125 duration-500;
   }
+
+  /*** SPECIFIC STYLE CLASSES ***/
+  .popper-active {
+    @apply opacity-100 -translate-y-2 transition duration-150 ease-linear
+  }
+
+  .popper-inactive {
+    @apply opacity-0 -translate-y-5 transition duration-150 ease-linear
+  }
+
+  .popper-ease {
+    @apply transition translate-x-0 duration-150 !delay-150
+  }
 }
