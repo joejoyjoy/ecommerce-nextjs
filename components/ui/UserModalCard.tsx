@@ -21,6 +21,17 @@ export default function UserModalCard() {
   };
 
   useEffect(() => {
+    if (!popperOpen) {
+      setTimeout(() => {
+        const modal = document.querySelector("#userCard");
+        if (modal) {
+          modal.classList.add("invisible");
+        }
+      }, 300);
+    }
+  }, [popperOpen]);
+
+  useEffect(() => {
     const handler = (e: any) => {
       if (popperRef.current != null) {
         if (!popperRef.current.contains(e.target)) {
@@ -73,6 +84,7 @@ export default function UserModalCard() {
         />
       </button>
       <section
+        id="userCard"
         className={`absolute top-[54px] right-0 flex flex-col items-end w-[375px] z-40 before:content-[""] before:rotate-45 ${
           popperOpen ? "popper-active" : "popper-inactive"
         }`}
