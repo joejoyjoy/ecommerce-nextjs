@@ -23,6 +23,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "gw.alipayobjects.com",
+      },
+      {
+        protocol: "https",
+        hostname: "xsgames.co",
+      },
     ],
   },
 };

@@ -48,4 +48,5 @@
   .animated-button {
     @apply transition ease-in-out active:scale-110 focus:outline-none focus:ring duration-200;
   }
+
 }

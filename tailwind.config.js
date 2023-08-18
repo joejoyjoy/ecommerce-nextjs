@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "yellow": "#FBBC05",
+        yellow: "#FBBC05",
         "gray-0": "#FFF",
         "gray-1": "#FDFDFE",
         "gray-2": "#FBFBFB",
@@ -24,23 +24,23 @@ module.exports = {
         "slate-2": "#3B4C60",
       },
       boxShadow: {
-        '3xl': '0 4px 20px 0 rgb(25 25 34/24%);',
+        "3xl": "0 4px 20px 0 rgb(25 25 34/24%);",
       },
       animation: {
-        bounce: 'bounce 0.25s'
+        bounce: "bounce 0.25s",
       },
       keyframes: {
         bounce: {
-          '0%, 100%': {
-            transform: 'none',
-            animationTimingFunction: 'linear',
+          "0%, 100%": {
+            transform: "none",
+            animationTimingFunction: "linear",
           },
-          '50%': {
-            transform: 'translateX(50%)',
-            animationTimingFunction: 'linear',
-          }
-        }
-      }
+          "50%": {
+            transform: "translateX(50%)",
+            animationTimingFunction: "linear",
+          },
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
