@@ -3,11 +3,12 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import ProvidersComponent from "../providers";
 import "../globals.css";
+import Topbar from "@/components/admin/Topbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Hats & Caps Admin Panel | eCommerce website by Joe",
+  title: "Admin Hats & Caps Panel | eCommerce website by Joe",
   description: "eCommerce Admin Panel made with nextJS and Mongoose",
 };
 
@@ -20,6 +21,7 @@ export default function RootLayout({
     <ProvidersComponent>
       <html lang="en">
         <body className={`${montserrat.className} bg-gray-3`}>
+          <Topbar />
           {children}
         </body>
       </html>

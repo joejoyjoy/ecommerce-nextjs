@@ -38,10 +38,14 @@
 
   /*** SPECIFIC STYLE CLASSES ***/
   .popper-active {
-    @apply opacity-100 -translate-y-2 transition duration-200;
+    @apply opacity-100 pointer-events-auto -translate-y-2 transition duration-200;
   }
 
   .popper-inactive {
-    @apply opacity-0 -translate-y-5 transition duration-200;
+    @apply opacity-0 pointer-events-none z-10 -translate-y-5 transition duration-200;
+  }
+
+  .animated-button {
+    @apply transition ease-in-out active:scale-110 focus:outline-none focus:ring duration-200;
   }
 }

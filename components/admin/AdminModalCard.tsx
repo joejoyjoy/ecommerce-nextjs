@@ -2,24 +2,17 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { signIn, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { GoTriangleUp } from "react-icons/go";
-import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import Link from "next/link";
 
-export default function UserModalCard() {
-  const { value, isLoggedIn, isLoading } = useSelector(
-    (store: any) => store.authReducer
-  );
+export default function AdminModalCard() {
+  const { value } = useSelector((store: any) => store.authReducer);
   const [popperOpen, setPopperOpen] = useState(false);
   let popperRef = useRef<HTMLInputElement>(null);
-
-  const handleAction = () => {
-    if (isLoggedIn) signOut();
-    if (!isLoggedIn) signIn();
-  };
 
   useEffect(() => {
     const modal = document.querySelector("#userCard");
@@ -46,22 +39,6 @@ export default function UserModalCard() {
     };
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col justify-center relative">
-        <div className="w-9 h-9 p-0 rounded-full drop-shadow-md">
-          <Image
-            src={"/assets/GIF/giphy.gif"}
-            alt="Loading"
-            width={36}
-            height={36}
-            className="rounded-full w-9 h-9 object-cover"
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col justify-center relative" ref={popperRef}>
       <button
@@ -69,16 +46,8 @@ export default function UserModalCard() {
         onClick={() => setPopperOpen(!popperOpen)}
       >
         <Image
-          src={
-            isLoggedIn
-              ? value.image
-              : "/assets/IMG/profile-placeholder-160x160.webp"
-          }
-          alt={
-            isLoggedIn
-              ? value.name + " profile picture"
-              : "User profile picture"
-          }
+          src={value.image ? value.image : "/assets/GIF/giphy.gif"}
+          alt={value.name}
           width={36}
           height={36}
           className="rounded-full w-9 h-9 object-cover"
@@ -96,67 +65,39 @@ export default function UserModalCard() {
           </div>
           <div className="flex items-center gap-3 py-3 px-5 border-b-[1px] transition duration-150">
             <Image
-              src={
-                isLoggedIn
-                  ? value.image
-                  : "/assets/IMG/profile-placeholder-160x160.webp"
-              }
-              alt={
-                isLoggedIn
-                  ? value.name + " profile picture"
-                  : "User profile picture"
-              }
+              src={value.image ? value.image : "/assets/GIF/giphy.gif"}
+              alt={value.name}
               width={48}
               height={48}
               className="rounded-full w-11 h-11 object-cover drop-shadow-md"
             />
             <span>
-              <p className="text-md">
-                Hey, {isLoggedIn ? value.name : "Guest"}!
-              </p>
-              {isLoggedIn && (
-                <p className="text-sm font-normal">{value.email}</p>
-              )}
+              <p className="text-md">Hey, {value.name}!</p>
+              <p className="text-sm font-normal">{value.email}</p>
             </span>
           </div>
           <span className="flex flex-col gap-1 p-2">
-            <div className="flex justify-between items-center p-2 rounded-md cursor-pointer group hover:bg-gray-03 transition duration-150">
-              Your Orders
+            <Link href={"/"} className="flex justify-between items-center p-2 rounded-md cursor-pointer group hover:bg-gray-03 transition duration-150">
+              Validate Product Submit
               <HiOutlineChevronRight
                 size={20}
                 className="group-hover:animate-bounce"
               />
-            </div>
-            <div className="flex justify-between items-center p-2 rounded-md cursor-pointer group hover:bg-gray-03 transition duration-150">
-              Your Favorites
+            </Link>
+            <Link href={"/"} className="flex justify-between items-center p-2 rounded-md cursor-pointer group hover:bg-gray-03 transition duration-150">
+              Back To Shop
               <HiOutlineChevronRight
                 size={20}
                 className="group-hover:animate-bounce"
               />
-            </div>
-            {isLoggedIn && value.isAdmin && (
-              <Link
-                href={"/admin"}
-                className="flex justify-between items-center p-2 rounded-md cursor-pointer group hover:bg-gray-03 transition duration-150"
-              >
-                Admin Panel
-                <HiOutlineChevronRight
-                  size={20}
-                  className="group-hover:animate-bounce"
-                />
-              </Link>
-            )}
+            </Link>
             <div
-              onClick={handleAction}
+              onClick={() => signOut()}
               className="flex justify-between items-center p-2 rounded-md cursor-pointer group hover:bg-gray-03 transition duration-150"
             >
               <span className="flex gap-1">
-                {isLoggedIn ? "Logout" : "Login"}
-                {isLoggedIn ? (
-                  <IoLogOutOutline size={23} />
-                ) : (
-                  <IoLogInOutline size={23} />
-                )}
+                Logout
+                <IoLogOutOutline size={23} />
               </span>
               <HiOutlineChevronRight
                 size={20}

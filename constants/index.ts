@@ -112,3 +112,18 @@ export const products = [
       "https://www.neweracap.co.uk/globalassets/products/d01_173/60364431/new-york-yankees-league-essential-orange-trucker-cap-60364431",
   },
 ];
+
+export const adminNavLinks = [
+  {
+    name: "All Products",
+    link: "/admin"
+  },
+  {
+    name: "Categories",
+    link: "/admin/categories"
+  },
+  {
+    name: "Users",
+    link: "/admin/users"
+  },
+]

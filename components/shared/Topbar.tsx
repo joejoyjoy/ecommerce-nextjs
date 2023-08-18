@@ -22,7 +22,7 @@ export default function Topbar() {
               <HiOutlineChevronDown size={12} className="text-slate-1" />
             </span>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-[1090px]:hidden">
             <Link href="/">Sizing</Link>
             <Link href="/">Scale</Link>
             <Link href="/">About Us</Link>
