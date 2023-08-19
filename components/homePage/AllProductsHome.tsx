@@ -38,7 +38,7 @@ export default function AllProductsHome() {
               </span>
               <span>
                 <span className="block text-xs font-normal text-gray-4">
-                  {gender ? "Men's " : "Woman's "}Fashion
+                  {gender ? "Men's " : "Womans "}Fashion
                 </span>
                 <span className="block text-sm font-semibold my-1 tracking-tight truncate">
                   {name}

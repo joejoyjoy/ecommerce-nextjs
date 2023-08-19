@@ -116,14 +116,75 @@ export const products = [
 export const adminNavLinks = [
   {
     name: "All Products",
-    link: "/admin"
+    link: "/admin",
   },
   {
     name: "Categories",
-    link: "/admin/categories"
+    link: "/admin/categories",
   },
   {
     name: "Users",
-    link: "/admin/users"
+    link: "/admin/users",
   },
-]
+];
+
+export const genderOptions = [
+  {
+    value: 0,
+    label: "Womans Fashion",
+  },
+  {
+    value: 1,
+    label: "Men's Fashion",
+  },
+];
+
+export const categoryOptions = [
+  {
+    value: "01",
+    label: "Men's Toque Hats",
+  },
+  {
+    value: "02",
+    label: "Men's Flat Caps",
+  },
+  {
+    value: "03",
+    label: "Men's Baseball Caps",
+  },
+  {
+    value: "04",
+    label: "Womans Summer Hats",
+  },
+  {
+    value: "05",
+    label: "Womans Beret Hats",
+  },
+];
+
+export const colorOptions = [
+  {
+    value: "red",
+    label: "Red",
+  },
+  {
+    value: "orange",
+    label: "Orange",
+  },
+  {
+    value: "yellow",
+    label: "Yellow",
+  },
+  {
+    value: "green",
+    label: "Green",
+  },
+  {
+    value: "blue",
+    label: "Blue",
+  },
+  {
+    value: "violet",
+    label: "Violet",
+  },
+];

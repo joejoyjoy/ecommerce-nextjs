@@ -68,4 +68,14 @@
   .errorText-form {
     @apply mt-1 text-xs font-medium text-red-500;
   }
+
+  .required-input-form {
+    @apply ml-1 text-lg font-bold text-red-500;
+  }
+}
+
+/*** OVERWRITING ANT DESIGN STYLE CLASSES ***/
+.ant-select-show-search {
+  width: -webkit-fill-available !important;
+  min-width: 200px !important;
 }
