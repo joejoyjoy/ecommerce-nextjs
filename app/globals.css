@@ -49,4 +49,23 @@
     @apply transition ease-in-out active:scale-110 focus:outline-none focus:ring duration-200;
   }
 
+  .label-form {
+    @apply inline-block mb-2 text-sm font-medium text-gray-900;
+  }
+
+  .input-form {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:ring-[0.08rem] focus:border-blue-500 block w-full p-2.5;
+  }
+
+  .label-file-form {
+    @apply flex flex-col gap-2 justify-center items-center w-32 h-32 bg-gray-50 border border-gray-300 text-gray-05 text-sm rounded-lg focus:outline-none p-2.5 cursor-pointer;
+  }
+
+  .label-file-preview-form {
+    @apply absolute inset-0 flex justify-center items-center w-[105px] h-[105px] m-[11.5px] text-gray-3 text-2xl object-cover opacity-0 rounded-sm transition duration-200 cursor-pointer;
+  }
+
+  .errorText-form {
+    @apply mt-1 text-xs font-medium text-red-500;
+  }
 }
