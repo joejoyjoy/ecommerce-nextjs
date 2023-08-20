@@ -19,8 +19,8 @@ const productSchema = new Schema(
       require: true,
     },
     image: {
-      type: String,
-      require: true,
+      public_id: { type: String, require: true },
+      secure_url: { type: String, require: true },
     },
     gender: {
       type: Number,

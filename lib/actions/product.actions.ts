@@ -9,6 +9,7 @@ import path from "path";
 import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import os from "os";
+import { generateSKU, generateRating, generateNumber } from "@/utils/generateFakeValue";
 
 interface Props {
   name: string;
@@ -83,9 +84,9 @@ export async function uploadPhoto(formData: any) {
 
     const imageArr = [
       {
-        public_id: photo.public_id,
-        secure_url: photo.secure_url
-      }
+        public_id: photo[0].public_id,
+        secure_url: photo[0].secure_url,
+      },
     ];
 
     return imageArr;
@@ -107,31 +108,27 @@ export async function publishProduct(
 
     const uploadPicture = await uploadPhoto(image);
 
-    console.log(user);
-    console.log(uploadPicture);
+    const SKU = generateSKU();
+    const rating = generateRating();
+    const likes = generateNumber();
 
-    /* if (user) {
-      if (image) {
-        const uploader = async (path: string) =>
-          await uploads(path, "HatsAndCaps_eCommerce_NextJS");
-
-        const file = image;
-        const { path } = file;
-
-        const pictureResponse = await uploader(path);
-        fs.unlinkSync(path);
-
-        await Product.create({
-          name,
-          desc,
-          price,
-          image: pictureResponse,
-          gender,
-          category,
-          color,
-        });
+    if (user) {
+      await Product.create({
+        SKU,
+        name,
+        desc,
+        price,
+        image: uploadPicture[0],
+        gender,
+        rating,
+        likes,
+        category,
+        color,
+      });
+      return {
+        msg: 'Successfully post!'
       }
-    } */
+    }
   } catch (error: any) {
     throw new Error(
       `Failed to publish product by admin. Fn() publishProduct: ${error.message}`

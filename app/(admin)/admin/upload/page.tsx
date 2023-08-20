@@ -40,19 +40,6 @@ export default function AdminUpload() {
     data.image = formData;
     
     const res = await publishProduct(value._id, data);
-    
-    console.log(res);
-
-    // console.log(value._id);
-
-    // console.log(data.image[0]);
-
-    // console.log(data.name);
-    // console.log(data.desc);
-    // console.log(data.price);
-    // console.log(data.gender);
-    // console.log(data.category);
-    // console.log(data.color);
   };
 
   const handleFileDelete = () => {
