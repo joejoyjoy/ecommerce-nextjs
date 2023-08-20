@@ -10,15 +10,16 @@ interface Params {
   name: string;
   desc: string;
   price: number;
-  gender: number;
-  color: string;
-  rating: number;
-  hex: string;
-  images: string;
+  image: ImageArr;
+}
+
+interface ImageArr {
+  public_id: string;
+  secure_url: string;
 }
 
 export default function ProductCard({ data }: Arr) {
-  const { SKU, name, desc, price, images } = data;
+  const { SKU, name, desc, price, image } = data;
 
   return (
     <div className="box-style p-0">
@@ -27,7 +28,7 @@ export default function ProductCard({ data }: Arr) {
           <span className="text-xs font-normal py-1 px-2">SKU: {SKU}</span>
         </div>
         <Image
-          src={images + "-left.jpg"}
+          src={image?.secure_url}
           alt={name}
           className="object-cover w-full"
           width={190}

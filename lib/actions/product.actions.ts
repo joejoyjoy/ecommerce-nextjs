@@ -9,7 +9,11 @@ import path from "path";
 import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import os from "os";
-import { generateSKU, generateRating, generateNumber } from "@/utils/generateFakeValue";
+import {
+  generateSKU,
+  generateRating,
+  generateNumber,
+} from "@/utils/generateFakeValue";
 
 interface Props {
   name: string;
@@ -66,7 +70,7 @@ async function uploadPhotoToCloudinary(newPicture: any) {
   return await Promise.all(photosPromise);
 }
 
-export async function uploadPhoto(formData: any) {
+async function uploadPhoto(formData: any) {
   try {
     // Save photo files to temporally folder
     const newPicture = await savePhotosToLocal(formData);
@@ -126,9 +130,22 @@ export async function publishProduct(
         color,
       });
       return {
-        msg: 'Successfully post!'
-      }
+        msg: "Successfully post!",
+      };
     }
+  } catch (error: any) {
+    throw new Error(
+      `Failed to publish product by admin. Fn() publishProduct: ${error.message}`
+    );
+  }
+}
+
+export async function allProducts() {
+  connectToDB();
+
+  try {
+    const res = await Product.find();
+    return res;
   } catch (error: any) {
     throw new Error(
       `Failed to publish product by admin. Fn() publishProduct: ${error.message}`

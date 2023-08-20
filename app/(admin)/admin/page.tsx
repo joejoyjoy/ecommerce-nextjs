@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Select, Space } from "antd";
 import ProtectedRoute from "../protectedRoute";
 import ProductCard from "@/components/shared/ProductCard";
-import { products } from "@/constants";
+import { allProducts } from "@/lib/actions/product.actions";
 
 const provinceData = ["Zhejiang", "Jiangsu"];
 
@@ -17,6 +17,7 @@ type CityName = keyof typeof cityData;
 
 export default function Admin() {
   const [cities, setCities] = useState(cityData[provinceData[0] as CityName]);
+  const [allItems, setAllItems] = useState([]);
   const [secondCity, setSecondCity] = useState(
     cityData[provinceData[0] as CityName][0]
   );
@@ -29,6 +30,14 @@ export default function Admin() {
   const onSecondCityChange = (value: CityName) => {
     setSecondCity(value);
   };
+
+  useEffect(() => {
+    const productArray = async () => {
+      const products = await allProducts();
+      setAllItems(JSON.parse(JSON.stringify(products)));
+    };
+    productArray()
+  }, [])
 
   return (
     <ProtectedRoute>
@@ -72,9 +81,10 @@ export default function Admin() {
             </Space>
           </div>
           <div className="grid grid-cols-[repeat(4,_minmax(0,_1fr))] gap-4">
-            {products.map((product) => {
-              return <ProductCard key={product.SKU} data={product} />;
-            })}
+            {allItems &&
+              allItems.map((product: any) => {
+                return <ProductCard key={product.SKU} data={product} />;
+              })}
           </div>
         </span>
       </main>

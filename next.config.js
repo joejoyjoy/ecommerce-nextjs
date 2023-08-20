@@ -31,6 +31,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "xsgames.co",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
     ],
   },
 };
