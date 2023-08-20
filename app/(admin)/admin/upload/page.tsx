@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { ConfigProvider, Select } from "antd";
 import ProtectedRoute from "../../protectedRoute";
@@ -8,12 +9,13 @@ import Image from "next/image";
 import { PiPlus } from "react-icons/pi";
 import { DeleteOutlined } from "@ant-design/icons";
 import { categoryOptions, colorOptions, genderOptions } from "@/constants";
+import { publishProduct } from "@/lib/actions/product.actions";
 
 interface IFormInput {
   name: string;
   desc: string;
   price: number;
-  image: string;
+  image: any;
   gender: number;
   category: string;
   color: string;
@@ -28,13 +30,29 @@ export default function AdminUpload() {
     reset,
     formState: { errors },
   } = useForm<IFormInput>();
+  const { value } = useSelector((store: any) => store.authReducer);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [first, setFirst] = useState(false);
 
-  const onSubmit = (data: IFormInput) => {
-    setFirst(!first);
-    console.log(data);
-    alert(JSON.stringify(data));
+  const onSubmit = async (data: IFormInput) => {
+    const formData = new FormData();
+
+    formData.append("image", data.image[0]);
+    data.image = formData;
+    
+    const res = await publishProduct(value._id, data);
+    
+    console.log(res);
+
+    // console.log(value._id);
+
+    // console.log(data.image[0]);
+
+    // console.log(data.name);
+    // console.log(data.desc);
+    // console.log(data.price);
+    // console.log(data.gender);
+    // console.log(data.category);
+    // console.log(data.color);
   };
 
   const handleFileDelete = () => {
@@ -61,8 +79,6 @@ export default function AdminUpload() {
     };
     handleImage();
   }, [watch("image")]);
-
-  console.log(imagePreview);
 
   return (
     <ProtectedRoute>

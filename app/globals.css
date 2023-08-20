@@ -46,7 +46,7 @@
   }
 
   .animated-button {
-    @apply transition ease-in-out active:scale-110 focus:outline-none focus:ring duration-200;
+    @apply transition ease-in-out active:scale-105 focus:outline-none focus:ring duration-200;
   }
 
   .label-form {
