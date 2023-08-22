@@ -56,6 +56,7 @@ export default function UserModalCard() {
             width={36}
             height={36}
             className="rounded-full w-9 h-9 object-cover"
+            priority
           />
         </div>
       </div>

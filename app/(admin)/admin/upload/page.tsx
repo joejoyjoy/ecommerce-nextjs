@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { ConfigProvider, Select } from "antd";
 import ProtectedRoute from "../../protectedRoute";
@@ -10,6 +10,8 @@ import { PiPlus } from "react-icons/pi";
 import { DeleteOutlined } from "@ant-design/icons";
 import { categoryOptions, colorOptions, genderOptions } from "@/constants";
 import { publishProduct } from "@/lib/actions/product.actions";
+import { AppDispatch } from "@/redux/store";
+import { uploadProduct } from "@/redux/features/product.slice";
 
 interface IFormInput {
   name: string;
@@ -32,14 +34,17 @@ export default function AdminUpload() {
   } = useForm<IFormInput>();
   const { value } = useSelector((store: any) => store.authReducer);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = async (data: IFormInput) => {
     const formData = new FormData();
 
     formData.append("image", data.image[0]);
     data.image = formData;
-    
-    const res = await publishProduct(value._id, data);
+
+    const userId = value._id;
+
+    await dispatch(uploadProduct({ userId, data }));
   };
 
   const handleFileDelete = () => {

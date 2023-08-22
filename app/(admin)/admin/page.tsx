@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Select, Space } from "antd";
 import ProtectedRoute from "../protectedRoute";
 import ProductCard from "@/components/shared/ProductCard";
-import { allProducts } from "@/lib/actions/product.actions";
+import { useSelector } from "react-redux";
 
 const provinceData = ["Zhejiang", "Jiangsu"];
 
@@ -17,7 +17,6 @@ type CityName = keyof typeof cityData;
 
 export default function Admin() {
   const [cities, setCities] = useState(cityData[provinceData[0] as CityName]);
-  const [allItems, setAllItems] = useState([]);
   const [secondCity, setSecondCity] = useState(
     cityData[provinceData[0] as CityName][0]
   );
@@ -31,13 +30,7 @@ export default function Admin() {
     setSecondCity(value);
   };
 
-  useEffect(() => {
-    const productArray = async () => {
-      const products = await allProducts();
-      setAllItems(JSON.parse(JSON.stringify(products)));
-    };
-    productArray()
-  }, [])
+  const { value } = useSelector((store: any) => store.productReducer);
 
   return (
     <ProtectedRoute>
@@ -81,8 +74,8 @@ export default function Admin() {
             </Space>
           </div>
           <div className="grid grid-cols-[repeat(4,_minmax(0,_1fr))] gap-4">
-            {allItems &&
-              allItems.map((product: any) => {
+            {value[0]?.image.secure_url != "" &&
+              value.map((product: any) => {
                 return <ProductCard key={product.SKU} data={product} />;
               })}
           </div>

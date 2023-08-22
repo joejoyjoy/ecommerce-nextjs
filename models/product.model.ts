@@ -36,6 +36,14 @@ const productSchema = new Schema(
     },
     category: String,
     color: String,
+    createdAt: {
+      type: String,
+      default: new Date().toISOString()
+    },
+    updatedAt: {
+      type: String,
+      default: new Date().toISOString()
+    },
   },
   { timestamps: true }
 );

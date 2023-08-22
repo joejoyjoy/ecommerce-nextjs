@@ -25,6 +25,28 @@ interface Props {
   color: string;
 }
 
+type ProductState = {
+  _id: string;
+  SKU: string;
+  name: string;
+  desc: string;
+  price: number;
+  image: ImageObject;
+  gender: number;
+  rating: number;
+  likes: number;
+  category: string;
+  color: string;
+  createdAt: any;
+  updatedAt: any;
+  __v: number;
+};
+
+type ImageObject = {
+  public_id: string;
+  secure_url: string;
+};
+
 cloudinary.v2.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
@@ -129,10 +151,11 @@ export async function publishProduct(
         category,
         color,
       });
-      return {
-        msg: "Successfully post!",
-      };
     }
+
+    const productData: ProductState[] = await Product.find();
+
+    return productData;
   } catch (error: any) {
     throw new Error(
       `Failed to publish product by admin. Fn() publishProduct: ${error.message}`
@@ -142,13 +165,13 @@ export async function publishProduct(
 
 export async function allProducts() {
   connectToDB();
-
+  
   try {
     const res = await Product.find();
     return res;
   } catch (error: any) {
     throw new Error(
-      `Failed to publish product by admin. Fn() publishProduct: ${error.message}`
+      `Failed to fetch product by admin. Fn() allProducts: ${error.message}`
     );
   }
 }

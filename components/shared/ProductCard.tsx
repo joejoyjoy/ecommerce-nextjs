@@ -33,6 +33,7 @@ export default function ProductCard({ data }: Arr) {
           className="object-cover w-full"
           width={190}
           height={190}
+          priority
         />
         <div className="absolute bottom-0 h-8">
           <p className="font-bold">€{Number(price).toFixed(2)}</p>
