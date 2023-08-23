@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Select } from "antd";
+import { Select, Cascader, message } from "antd";
 import Image from "next/image";
 import { PiPlus } from "react-icons/pi";
 import { DeleteOutlined } from "@ant-design/icons";
-import { categoryOptions, colorOptions, genderOptions } from "@/constants";
+import { colorOptions, optionsCascader } from "@/constants";
 
 interface IFormInput {
   name: string;
@@ -63,7 +63,20 @@ export default function FormProduct({
   const handleFileDelete = () => {
     setImagePreview("");
     reset({ image: "" });
+    message.error("Successfully deleted the uploaded image");
   };
+
+  const onChangeCascader = (value: any) => {
+    if (value) {
+      if (value[0] || value[1]) {
+        setValue("gender", value[0]);
+        setValue("category", value[1]);
+      }
+    }
+  };
+
+  // Just show the latest item.
+  const displayRender = (labels: string[]) => labels[labels.length - 1];
 
   useEffect(() => {
     const handleImage = () => {
@@ -117,7 +130,7 @@ export default function FormProduct({
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onInvalid)}
-      className="flex flex-col gap-6"
+      className="flex flex-col gap-2"
     >
       <div className="grid grid-cols-[1fr,_auto] gap-8">
         <div className="flex flex-col gap-6">
@@ -150,61 +163,67 @@ export default function FormProduct({
             )}
           </div>
 
-          <div className="grid grid-cols-[repeat(2,_minmax(0,_1fr))] gap-6">
-            <div>
-              <span className="label-form block">
-                Gender Fashion
-                <b className="required-input-form">*</b>
-              </span>
-              <Select
-                showSearch
-                placeholder="Select a gender fashion"
-                optionFilterProp="children"
-                defaultValue={
-                  purpose != "upload" ? dataProduct?.gender : undefined
-                }
-                filterOption={(input, option) =>
-                  (option?.label ?? "")
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
-                options={genderOptions}
-                {...register("gender", {
-                  required: true,
-                })}
-                onChange={(value) => {
-                  setValue("gender", value);
-                }}
-              />
-            </div>
-
+          <div className="grid grid-cols-[1fr,_95px] gap-6">
             <div>
               <span className="label-form block">
                 Category
                 <b className="required-input-form">*</b>
               </span>
-              <Select
-                showSearch
-                placeholder="Select a category"
-                optionFilterProp="children"
+              <Cascader
+                options={optionsCascader}
+                size="large"
+                placeholder="Select Gender / Select Category"
+                expandTrigger="hover"
                 defaultValue={
-                  purpose != "upload" ? dataProduct?.category : undefined
+                  purpose != "upload"
+                    ? dataProduct && [dataProduct.gender, dataProduct.category]
+                    : undefined
                 }
-                filterOption={(input, option) =>
-                  (option?.label ?? "")
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
-                options={categoryOptions}
+                displayRender={displayRender}
                 {...register("category", {
                   required: true,
                 })}
-                onChange={(value) => {
-                  setValue("category", value);
-                }}
+                onChange={onChangeCascader}
               />
             </div>
 
+            <div>
+              <label htmlFor="product_price" className="label-form">
+                Price
+                <b className="required-input-form">*</b>
+              </label>
+              <div className="flex items-center">
+                <span className="mr-2 text-gray-05">€</span>
+                <input
+                  {...register("price", {
+                    required: true,
+                    maxLength: 4,
+                    pattern: /^[0-9]*$/i,
+                  })}
+                  defaultValue={
+                    purpose != "upload" ? dataProduct?.price : undefined
+                  }
+                  id="product_price"
+                  placeholder="35"
+                  className="input-form"
+                />
+              </div>
+
+              {errors?.price?.type === "required" && (
+                <p className="errorText-form">This field is required</p>
+              )}
+              {errors?.price?.type === "maxLength" && (
+                <p className="errorText-form">
+                  Product price cannot exceed 9.999€
+                </p>
+              )}
+              {errors?.price?.type === "pattern" && (
+                <p className="errorText-form">Numeric characters only</p>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-[repeat(2,_minmax(0,_1fr))] gap-6">
             <div>
               <span className="label-form block">
                 Color
@@ -212,6 +231,7 @@ export default function FormProduct({
               </span>
               <Select
                 showSearch
+                size="large"
                 placeholder="Select a Color"
                 optionFilterProp="children"
                 defaultValue={
@@ -233,7 +253,7 @@ export default function FormProduct({
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-6 max-w-[128px] mx-auto">
+        <div className="flex flex-col gap-6 max-w-[144px] mx-auto">
           <div>
             <span className="label-form">
               Upload Picture
@@ -250,9 +270,9 @@ export default function FormProduct({
                   <Image
                     src={imagePreview}
                     alt="profile icon"
-                    width={105}
-                    height={105}
-                    className="block w-[105px] h-[105px] m-[11.5px] object-cover rounded-sm"
+                    width={120}
+                    height={120}
+                    className="block w-[120px] h-[120px] m-[11.5px] object-cover rounded-sm"
                     placeholder="blur"
                     blurDataURL={imagePreview}
                     priority
@@ -284,41 +304,6 @@ export default function FormProduct({
               )}
             </div>
           </div>
-
-          <div>
-            <label htmlFor="product_price" className="label-form">
-              Price
-              <b className="required-input-form">*</b>
-            </label>
-            <div className="flex items-center">
-              <span className="mr-2 text-gray-05">€</span>
-              <input
-                {...register("price", {
-                  required: true,
-                  maxLength: 4,
-                  pattern: /^[0-9]*$/i,
-                })}
-                defaultValue={
-                  purpose != "upload" ? dataProduct?.price : undefined
-                }
-                id="product_price"
-                placeholder="35"
-                className="input-form"
-              />
-            </div>
-
-            {errors?.price?.type === "required" && (
-              <p className="errorText-form">This field is required</p>
-            )}
-            {errors?.price?.type === "maxLength" && (
-              <p className="errorText-form">
-                Product price cannot exceed 9.999€
-              </p>
-            )}
-            {errors?.price?.type === "pattern" && (
-              <p className="errorText-form">Numeric characters only</p>
-            )}
-          </div>
         </div>
       </div>
 
@@ -331,6 +316,7 @@ export default function FormProduct({
           {...register("desc", {
             required: true,
             maxLength: 750,
+            minLength: 110,
             pattern: /^[A-Za-z0-9\s,.%|·]+$/i,
           })}
           defaultValue={purpose != "upload" ? dataProduct?.desc : undefined}

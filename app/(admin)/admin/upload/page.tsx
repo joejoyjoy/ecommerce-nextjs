@@ -55,6 +55,7 @@ export default function AdminUpload() {
                   borderRadius: 7,
                   colorBgContainer: "#f9fafb",
                   colorTextPlaceholder: "#a7afb9",
+                  fontWeightStrong: 300
                 },
               }}
             >

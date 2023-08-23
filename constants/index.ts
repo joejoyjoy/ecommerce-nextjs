@@ -189,40 +189,48 @@ export const colorOptions = [
   },
 ];
 
-export const coordinateGender = [
+interface Option {
+  value: number;
+  label: string;
+  children?: OptionChild[];
+}
+interface OptionChild {
+  value: string;
+  label: string;
+  children?: OptionChild[];
+}
+
+export const optionsCascader: Option[] = [
   {
     value: 0,
     label: "Womans Fashion",
+    children: [
+      {
+        value: "04",
+        label: "Womans Summer Hats",
+      },
+      {
+        value: "05",
+        label: "Womans Beret Hats",
+      },
+    ],
   },
   {
     value: 1,
     label: "Men's Fashion",
+    children: [
+      {
+        value: "01",
+        label: "Men's Toque Hats",
+      },
+      {
+        value: "02",
+        label: "Men's Flat Caps",
+      },
+      {
+        value: "03",
+        label: "Men's Baseball Caps",
+      },
+    ],
   },
 ];
-
-export const coordinateCategory = {
-  1: [
-    {
-      value: "01",
-      label: "Men's Toque Hats",
-    },
-    {
-      value: "02",
-      label: "Men's Flat Caps",
-    },
-    {
-      value: "03",
-      label: "Men's Baseball Caps",
-    },
-  ],
-  0: [
-    {
-      value: "04",
-      label: "Womans Summer Hats",
-    },
-    {
-      value: "05",
-      label: "Womans Beret Hats",
-    },
-  ],
-};

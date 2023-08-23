@@ -58,11 +58,11 @@
   }
 
   .label-file-form {
-    @apply flex flex-col gap-2 justify-center items-center w-32 h-32 bg-gray-50 border border-gray-300 text-gray-05 text-sm rounded-lg focus:outline-none p-2.5 cursor-pointer;
+    @apply flex flex-col gap-2 justify-center items-center w-36 h-36 bg-gray-50 border border-gray-300 text-gray-05 text-sm rounded-lg focus:outline-none p-2.5 cursor-pointer;
   }
 
   .label-file-preview-form {
-    @apply absolute inset-0 flex justify-center items-center w-[105px] h-[105px] m-[11.5px] text-gray-3 text-2xl object-cover opacity-0 rounded-sm transition duration-200 cursor-pointer;
+    @apply absolute inset-0 flex justify-center items-center w-[120px] h-[120px] m-[11.5px] text-gray-3 text-2xl object-cover opacity-0 rounded-sm transition duration-200 cursor-pointer;
   }
 
   .errorText-form {
@@ -76,6 +76,11 @@
 
 /*** OVERWRITING ANT DESIGN STYLE CLASSES ***/
 .ant-select-show-search {
+  width: -webkit-fill-available !important;
+  min-width: 200px !important;
+}
+
+.ant-cascader {
   width: -webkit-fill-available !important;
   min-width: 200px !important;
 }

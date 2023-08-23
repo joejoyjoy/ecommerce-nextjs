@@ -94,11 +94,11 @@ export default function AdminEdit() {
       data.gender == productData.gender &&
       data.color == productData.color
     ) {
-      message.warning("No changes found!");
+      message.warning("No changes found yet!");
     } else {
       const updateData: UpdateData = { ...data, id: productData._id };
       await dispatch(updateProduct({ userId, updateData }));
-      message.success("Changes updates successfully");
+      message.success("Changes updated successfully");
       router.push("/admin");
     }
 
@@ -147,6 +147,7 @@ export default function AdminEdit() {
                 borderRadius: 7,
                 colorBgContainer: "#f9fafb",
                 colorTextPlaceholder: "#a7afb9",
+                fontWeightStrong: 300
               },
             }}
           >
