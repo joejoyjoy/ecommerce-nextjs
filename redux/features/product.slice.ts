@@ -1,4 +1,9 @@
-import { allProducts, publishProduct } from "@/lib/actions/product.actions";
+import {
+  allProducts,
+  deleteProductById,
+  findProductAndUpdate,
+  publishProduct,
+} from "@/lib/actions/product.actions";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 type InitialState = {
@@ -17,6 +22,7 @@ type ProductState = {
   likes: number;
   category: string;
   color: string;
+  publisherId: string;
   createdAt: any;
   updatedAt: any;
   __v: number;
@@ -44,6 +50,7 @@ const initialState: InitialState = {
       likes: 0,
       category: "",
       color: "",
+      publisherId: "",
       createdAt: 0,
       updatedAt: 0,
       __v: 0,
@@ -61,6 +68,16 @@ interface Props {
   color: string;
 }
 
+interface UpdateData {
+  name: string;
+  desc: string;
+  price: number;
+  gender: number;
+  category: string;
+  color: string;
+  id: string;
+}
+
 export const uploadProduct = createAsyncThunk(
   "product/uploadProduct",
   async ({ userId, data }: { userId: string; data: Props }) => {
@@ -73,6 +90,28 @@ export const findAllProducts = createAsyncThunk(
   "product/findAllProducts",
   async () => {
     const response = await allProducts();
+    return response;
+  }
+);
+
+export const deleteProduct = createAsyncThunk(
+  "product/deleteProduct",
+  async ({ productId }: { productId: string }) => {
+    const response = await deleteProductById(productId);
+    return response;
+  }
+);
+
+export const updateProduct = createAsyncThunk(
+  "product/updateProduct",
+  async ({
+    userId,
+    updateData,
+  }: {
+    userId: string;
+    updateData: UpdateData;
+  }) => {
+    const response = await findProductAndUpdate(userId, updateData);
     return response;
   }
 );
@@ -98,8 +137,27 @@ export const product = createSlice({
         state.value = action.payload;
       }
     });
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      if (state.value != null) {
+        const updatedArray = state.value.filter(
+          (obj) => obj._id !== action.payload
+        );
+        state.value = updatedArray;
+      }
+    });
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      if (state.value != null) {
+        const findArr = state.value.filter(
+          (obj) => obj._id == action.payload.id
+        );
+        state.value = {
+          ...state.value,
+          ...findArr,
+        };
+      }
+    });
   },
 });
 
-// export const { noAuthFound } = product.actions;
+// export const { findProductById } = product.actions;
 export default product.reducer;

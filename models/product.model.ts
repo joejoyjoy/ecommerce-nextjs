@@ -36,6 +36,7 @@ const productSchema = new Schema(
     },
     category: String,
     color: String,
+    publisherId: String,
     createdAt: {
       type: String,
       default: new Date().toISOString()

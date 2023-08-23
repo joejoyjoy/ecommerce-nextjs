@@ -24,6 +24,15 @@ interface Props {
   category: string;
   color: string;
 }
+interface UpdateData {
+  name: string;
+  desc: string;
+  price: number;
+  gender: number;
+  category: string;
+  color: string;
+  id: string;
+}
 
 type ProductState = {
   _id: string;
@@ -37,6 +46,7 @@ type ProductState = {
   likes: number;
   category: string;
   color: string;
+  publisherId: string;
   createdAt: any;
   updatedAt: any;
   __v: number;
@@ -150,6 +160,7 @@ export async function publishProduct(
         likes,
         category,
         color,
+        publisherId: user._id,
       });
     }
 
@@ -165,13 +176,80 @@ export async function publishProduct(
 
 export async function allProducts() {
   connectToDB();
-  
+
   try {
     const res = await Product.find();
     return res;
   } catch (error: any) {
     throw new Error(
       `Failed to fetch product by admin. Fn() allProducts: ${error.message}`
+    );
+  }
+}
+
+export async function deletePictureById(public_id: string) {
+  connectToDB();
+
+  try {
+    await cloudinary.v2.uploader.destroy(public_id);
+    revalidatePath("/");
+    return { msg: "Image Deleted Successfully!" };
+  } catch (error: any) {
+    throw new Error(
+      `Failed to delete image of product by admin. Fn() deletePictureById: ${error.message}`
+    );
+  }
+}
+
+export async function deleteProductById(productId: string) {
+  connectToDB();
+
+  try {
+    const product = await Product.findByIdAndDelete(productId);
+
+    if (product) {
+      deletePictureById(product.image.public_id);
+    }
+
+    return product._id;
+  } catch (error: any) {
+    throw new Error(
+      `Failed to delete product by admin. Fn() deleteProductById: ${error.message}`
+    );
+  }
+}
+
+export async function findProductById(productId: string) {
+  connectToDB();
+
+  try {
+    const res = await Product.findById(productId);
+    return res;
+  } catch (error: any) {
+    return "REDIRECT";
+  }
+}
+
+export async function findProductAndUpdate(userId: string, updateData: UpdateData) {
+  connectToDB();
+
+  try {
+    const res = await Product.findById(updateData.id);
+    
+    if (userId === res.publisherId) {
+      const product = await Product.findByIdAndUpdate(updateData.id, {
+        name: updateData.name,
+        desc: updateData.desc,
+        price: updateData.price,
+        category: updateData.category,
+        gender: updateData.gender,
+        color: updateData.color,
+      });
+      return product;
+    }
+  } catch (error: any) {
+    throw new Error(
+      `Failed to update product by admin. Fn() findProductAndUpdate: ${error.message}`
     );
   }
 }

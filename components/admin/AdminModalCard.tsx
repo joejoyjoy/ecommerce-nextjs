@@ -69,6 +69,7 @@ export default function AdminModalCard() {
               alt={value.name}
               width={48}
               height={48}
+              priority
               className="rounded-full w-11 h-11 object-cover drop-shadow-md"
             />
             <span>

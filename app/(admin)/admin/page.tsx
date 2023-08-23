@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { Select, Space } from "antd";
+import {  useSelector } from "react-redux";
 import ProtectedRoute from "../protectedRoute";
 import ProductCard from "@/components/shared/ProductCard";
-import { useSelector } from "react-redux";
+import { deleteProductById } from "@/lib/actions/product.actions";
 
 const provinceData = ["Zhejiang", "Jiangsu"];
 
