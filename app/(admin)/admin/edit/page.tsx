@@ -4,15 +4,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, message } from "antd";
 import ProtectedRoute from "../../protectedRoute";
 import { AppDispatch } from "@/redux/store";
-import { updateProduct, uploadProduct } from "@/redux/features/product.slice";
+import { updateProduct } from "@/redux/features/product.slice";
 import FormProduct from "@/components/ui/FormProduct";
-import {
-  findProductAndUpdate,
-  findProductById,
-} from "@/lib/actions/product.actions";
+import { findProductById } from "@/lib/actions/product.actions";
 
 interface IFormInput {
   name: string;
@@ -60,6 +57,7 @@ interface UpdateData {
 export default function AdminEdit() {
   const { value, isLoading } = useSelector((store: any) => store.authReducer);
   const dispatch = useDispatch<AppDispatch>();
+  const [messageApi] = message.useMessage();
   const searchParams = useSearchParams();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [productData, setProductData] = useState<ProductState>({
@@ -88,7 +86,6 @@ export default function AdminEdit() {
 
   const onSubmit = async (data: IFormInput) => {
     const userId: string = value._id;
-
     if (
       data.name == productData.name &&
       data.desc == productData.desc &&
@@ -97,16 +94,17 @@ export default function AdminEdit() {
       data.gender == productData.gender &&
       data.color == productData.color
     ) {
-      console.log("No changes found!");
+      message.warning("No changes found!");
     } else {
       const updateData: UpdateData = { ...data, id: productData._id };
-      const res = await dispatch(updateProduct({ userId, updateData }));
-      console.log(res.type.includes("fulfilled"));
+      await dispatch(updateProduct({ userId, updateData }));
+      message.success("Changes updates successfully");
+      router.push("/admin");
     }
 
     // await dispatch(uploadProduct({ userId, data }));
   };
-  
+
   useEffect(() => {
     if (productId == null) {
       setIsRedirecting(true);

@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import { Select, Space } from "antd";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProtectedRoute from "../protectedRoute";
 import ProductCard from "@/components/shared/ProductCard";
-import { deleteProductById } from "@/lib/actions/product.actions";
 
 const provinceData = ["Zhejiang", "Jiangsu"];
 
@@ -34,54 +33,54 @@ export default function Admin() {
   const { value } = useSelector((store: any) => store.productReducer);
 
   return (
-    <ProtectedRoute>
-      <main className="responsive">
-        <span className="responsive_wrapper grid grid-cols-[235px,_1fr] gap-4 py-3 mb-6">
-          <div className="bg-yellow">
-            <Space wrap>
-              <Select
-                // defaultValue={provinceData[0]}
-                style={{ width: 120 }}
-                onChange={handleProvinceChange}
-                options={provinceData.map((province) => ({
-                  label: province,
-                  value: province,
-                }))}
-              />
-              <Select
-                style={{ width: 120 }}
-                // value={secondCity}
-                onChange={onSecondCityChange}
-                options={cities.map((city) => ({ label: city, value: city }))}
-              />
-              <Select
-                style={{ width: 120 }}
-                // value={secondCity}
-                onChange={onSecondCityChange}
-                options={cities.map((city) => ({ label: city, value: city }))}
-              />
-              <Select
-                style={{ width: 120 }}
-                // value={secondCity}
-                onChange={onSecondCityChange}
-                options={cities.map((city) => ({ label: city, value: city }))}
-              />
-              <Select
-                style={{ width: 120 }}
-                // value={secondCity}
-                onChange={onSecondCityChange}
-                options={cities.map((city) => ({ label: city, value: city }))}
-              />
-            </Space>
-          </div>
-          <div className="grid grid-cols-[repeat(4,_minmax(0,_1fr))] gap-4">
-            {value[0]?.image.secure_url != "" &&
-              value.map((product: any) => {
-                return <ProductCard key={product.SKU} data={product} />;
-              })}
-          </div>
-        </span>
-      </main>
-    </ProtectedRoute>
+      <ProtectedRoute>
+        <main className="responsive">
+          <span className="responsive_wrapper grid grid-cols-[235px,_1fr] gap-4 py-3 mb-6">
+            <div className="bg-yellow">
+              <Space wrap>
+                <Select
+                  // defaultValue={provinceData[0]}
+                  style={{ width: 120 }}
+                  onChange={handleProvinceChange}
+                  options={provinceData.map((province) => ({
+                    label: province,
+                    value: province,
+                  }))}
+                />
+                <Select
+                  style={{ width: 120 }}
+                  // value={secondCity}
+                  onChange={onSecondCityChange}
+                  options={cities.map((city) => ({ label: city, value: city }))}
+                />
+                <Select
+                  style={{ width: 120 }}
+                  // value={secondCity}
+                  onChange={onSecondCityChange}
+                  options={cities.map((city) => ({ label: city, value: city }))}
+                />
+                <Select
+                  style={{ width: 120 }}
+                  // value={secondCity}
+                  onChange={onSecondCityChange}
+                  options={cities.map((city) => ({ label: city, value: city }))}
+                />
+                <Select
+                  style={{ width: 120 }}
+                  // value={secondCity}
+                  onChange={onSecondCityChange}
+                  options={cities.map((city) => ({ label: city, value: city }))}
+                />
+              </Space>
+            </div>
+            <div className="grid grid-cols-[repeat(4,_minmax(0,_1fr))] gap-4">
+              {value[0]?.image.secure_url != "" &&
+                value.map((product: any) => {
+                  return <ProductCard key={product.SKU} data={product} />;
+                })}
+            </div>
+          </span>
+        </main>
+      </ProtectedRoute>
   );
 }

@@ -17,14 +17,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
-    <ProvidersComponent>
-      <html lang="en">
-        <body className={`${montserrat.className} bg-gray-3`}>
-          <Topbar />
-          {children}
-        </body>
-      </html>
-    </ProvidersComponent>
+      <ProvidersComponent>
+        <html lang="en">
+          <body className={`${montserrat.className} bg-gray-3`}>
+            <Topbar />
+            {children}
+          </body>
+        </html>
+      </ProvidersComponent>
   );
 }

@@ -1,10 +1,11 @@
-import { redirect } from "next/navigation";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { deleteProduct } from "@/redux/features/product.slice";
+import { message, Popconfirm } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 interface Arr {
   data: Params;
@@ -32,6 +33,13 @@ export default function ProductCard({ data }: Arr) {
   const handleDelete = (productId: string) => {
     dispatch(deleteProduct({ productId }));
   };
+
+  const confirm = () => {
+    message.success("Selected product deleted");
+    handleDelete(_id);
+  };
+
+  const cancel = () => {};
 
   return (
     <div className="box-style p-0">
@@ -64,10 +72,16 @@ export default function ProductCard({ data }: Arr) {
         >
           <EditOutlined />
         </Link>
-        <DeleteOutlined
-          onClick={() => handleDelete(_id)}
-          className="flex justify-center items-center w-full p-2 text-red-500 transition hover:text-red-900 cursor-pointer"
-        />
+        <Popconfirm
+          title="Delete the task"
+          description="Are you sure to delete this task?"
+          onConfirm={confirm}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteOutlined className="flex justify-center items-center w-full p-2 text-red-500 transition hover:text-red-900 cursor-pointer" />
+        </Popconfirm>
       </div>
     </div>
   );

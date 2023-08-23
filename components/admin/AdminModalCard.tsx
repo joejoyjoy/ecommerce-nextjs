@@ -50,6 +50,7 @@ export default function AdminModalCard() {
           alt={value.name}
           width={36}
           height={36}
+          priority
           className="rounded-full w-9 h-9 object-cover"
         />
       </button>

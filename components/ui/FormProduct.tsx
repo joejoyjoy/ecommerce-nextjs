@@ -47,7 +47,7 @@ export default function FormProduct({
   onSubmit,
 }: {
   purpose: string;
-  dataProduct: ProductState;
+  dataProduct?: ProductState;
   onSubmit: SubmitHandler<IFormInput>;
 }) {
   const {
@@ -88,7 +88,7 @@ export default function FormProduct({
   }, [watch("image")]);
 
   useEffect(() => {
-    if (purpose != "upload") {
+    if (purpose != "upload" && dataProduct) {
       setValue("gender", dataProduct.gender);
       setValue("category", dataProduct.category);
       setValue("color", dataProduct.color);
@@ -100,7 +100,7 @@ export default function FormProduct({
 
   const onInvalid = (errors: any) => console.error(errors);
 
-  if (purpose != "upload" && dataProduct.name === "") {
+  if (purpose != "upload" && dataProduct?.name === "") {
     return (
       <div className="flex justify-center items-center absolute top-0 left-0 right-0 bottom-0 h-screen w-screen bg-inherit z-50">
         <Image
@@ -135,7 +135,7 @@ export default function FormProduct({
               id="product_name"
               placeholder="LA Dodgers League Essential"
               className="input-form"
-              defaultValue={purpose != "upload" ? dataProduct.name : undefined}
+              defaultValue={purpose != "upload" ? dataProduct?.name : undefined}
             />
             {errors?.name?.type === "required" && (
               <p className="errorText-form">This field is required</p>
@@ -161,7 +161,7 @@ export default function FormProduct({
                 placeholder="Select a gender fashion"
                 optionFilterProp="children"
                 defaultValue={
-                  purpose != "upload" ? dataProduct.gender : undefined
+                  purpose != "upload" ? dataProduct?.gender : undefined
                 }
                 filterOption={(input, option) =>
                   (option?.label ?? "")
@@ -188,7 +188,7 @@ export default function FormProduct({
                 placeholder="Select a category"
                 optionFilterProp="children"
                 defaultValue={
-                  purpose != "upload" ? dataProduct.category : undefined
+                  purpose != "upload" ? dataProduct?.category : undefined
                 }
                 filterOption={(input, option) =>
                   (option?.label ?? "")
@@ -215,7 +215,7 @@ export default function FormProduct({
                 placeholder="Select a Color"
                 optionFilterProp="children"
                 defaultValue={
-                  purpose != "upload" ? dataProduct.color : undefined
+                  purpose != "upload" ? dataProduct?.color : undefined
                 }
                 filterOption={(input, option) =>
                   (option?.label ?? "")
@@ -241,7 +241,7 @@ export default function FormProduct({
             </span>
             <div className={`${purpose != "upload" ? "cursor-no-drop" : ""}`}>
               {imagePreview ? (
-                <div
+                <button
                   onClick={handleFileDelete}
                   className={`relative label-file-form group overflow-hidden ${
                     purpose != "upload" ? "pointer-events-none" : ""
@@ -252,13 +252,15 @@ export default function FormProduct({
                     alt="profile icon"
                     width={105}
                     height={105}
-                    priority
                     className="block w-[105px] h-[105px] m-[11.5px] object-cover rounded-sm"
+                    placeholder="blur"
+                    blurDataURL={imagePreview}
+                    priority
                   />
                   <div className="label-file-preview-form group-hover:opacity-100 group-hover:bg-black group-hover:bg-opacity-40">
                     <DeleteOutlined />
                   </div>
-                </div>
+                </button>
               ) : (
                 <>
                   <label htmlFor="product_image" className="label-file-form">
@@ -297,7 +299,7 @@ export default function FormProduct({
                   pattern: /^[0-9]*$/i,
                 })}
                 defaultValue={
-                  purpose != "upload" ? dataProduct.price : undefined
+                  purpose != "upload" ? dataProduct?.price : undefined
                 }
                 id="product_price"
                 placeholder="35"
@@ -331,7 +333,7 @@ export default function FormProduct({
             maxLength: 750,
             pattern: /^[A-Za-z0-9\s,.%|·]+$/i,
           })}
-          defaultValue={purpose != "upload" ? dataProduct.desc : undefined}
+          defaultValue={purpose != "upload" ? dataProduct?.desc : undefined}
           id="product_desc"
           placeholder="Structured crown, Snapback, Curved visor, Mesh back and..."
           className="input-form max-h-52"

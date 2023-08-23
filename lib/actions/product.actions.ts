@@ -166,7 +166,7 @@ export async function publishProduct(
 
     const productData: ProductState[] = await Product.find();
 
-    return productData;
+    return JSON.parse(JSON.stringify(productData));
   } catch (error: any) {
     throw new Error(
       `Failed to publish product by admin. Fn() publishProduct: ${error.message}`
@@ -179,7 +179,7 @@ export async function allProducts() {
 
   try {
     const res = await Product.find();
-    return res;
+    return JSON.parse(JSON.stringify(res));
   } catch (error: any) {
     throw new Error(
       `Failed to fetch product by admin. Fn() allProducts: ${error.message}`
@@ -211,7 +211,7 @@ export async function deleteProductById(productId: string) {
       deletePictureById(product.image.public_id);
     }
 
-    return product._id;
+    return JSON.parse(JSON.stringify(product._id));
   } catch (error: any) {
     throw new Error(
       `Failed to delete product by admin. Fn() deleteProductById: ${error.message}`
@@ -224,18 +224,21 @@ export async function findProductById(productId: string) {
 
   try {
     const res = await Product.findById(productId);
-    return res;
+    return JSON.parse(JSON.stringify(res));
   } catch (error: any) {
     return "REDIRECT";
   }
 }
 
-export async function findProductAndUpdate(userId: string, updateData: UpdateData) {
+export async function findProductAndUpdate(
+  userId: string,
+  updateData: UpdateData
+) {
   connectToDB();
 
   try {
     const res = await Product.findById(updateData.id);
-    
+
     if (userId === res.publisherId) {
       const product = await Product.findByIdAndUpdate(updateData.id, {
         name: updateData.name,
@@ -245,7 +248,7 @@ export async function findProductAndUpdate(userId: string, updateData: UpdateDat
         gender: updateData.gender,
         color: updateData.color,
       });
-      return product;
+      return JSON.parse(JSON.stringify(product));
     }
   } catch (error: any) {
     throw new Error(
