@@ -33,7 +33,7 @@
     @apply absolute text-3xl font-black text-gray-0 text-center drop-shadow-lg transition ease-in-out duration-700 z-10;
   }
   .category-cards_text {
-    @apply text-xl font-light text-center transition ease-in-out translate-y-12 scale-125 duration-500;
+    @apply text-xl font-light text-center transition ease-in-out scale-125 duration-500;
   }
 
   /*** SPECIFIC STYLE CLASSES ***/
