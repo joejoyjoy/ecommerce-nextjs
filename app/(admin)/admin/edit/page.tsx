@@ -57,7 +57,6 @@ interface UpdateData {
 export default function AdminEdit() {
   const { value, isLoading } = useSelector((store: any) => store.authReducer);
   const dispatch = useDispatch<AppDispatch>();
-  const [messageApi] = message.useMessage();
   const searchParams = useSearchParams();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [productData, setProductData] = useState<ProductState>({
@@ -101,8 +100,6 @@ export default function AdminEdit() {
       message.success("Changes updated successfully");
       router.push("/admin");
     }
-
-    // await dispatch(uploadProduct({ userId, data }));
   };
 
   useEffect(() => {
@@ -130,6 +127,7 @@ export default function AdminEdit() {
           alt="Loading animation"
           width={64}
           height={64}
+          priority
         />
       </div>
     );

@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Alert, Select, Cascader, message, notification } from "antd";
+import { Select, Cascader, message, notification } from "antd";
 import Image from "next/image";
 import { PiPlus } from "react-icons/pi";
 import { DeleteOutlined } from "@ant-design/icons";
 import { colorOptions, optionsCascader } from "@/constants";
-import type { NotificationPlacement } from "antd/es/notification/interface";
 
 interface IFormInput {
   name: string;

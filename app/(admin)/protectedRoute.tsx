@@ -21,6 +21,7 @@ export default function ProtectedRoute({
           alt="Loading animation"
           width={64}
           height={64}
+          priority
         />
       </div>
     );

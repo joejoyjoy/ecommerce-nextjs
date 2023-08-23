@@ -159,5 +159,4 @@ export const product = createSlice({
   },
 });
 
-// export const { findProductById } = product.actions;
 export default product.reducer;

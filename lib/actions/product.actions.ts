@@ -76,12 +76,6 @@ async function savePhotosToLocal(formData: any) {
       const tmpdir = os.tmpdir();
       const uploadDir = path.join(tmpdir, `/${name}.${ext}`);
 
-      /* const uploadDir = path.join(
-      process.cwd(),
-      "public/uploads",
-      `/${name}.${ext}}`
-    ); */
-
       await fs.writeFile(uploadDir, buffer);
 
       return {

@@ -30,6 +30,7 @@ export default function AdminUpload() {
       content: "Uploading product to cloud..",
       duration: 0,
     });
+
     const formData = new FormData();
 
     formData.append("image", data.image[0]);
@@ -38,6 +39,7 @@ export default function AdminUpload() {
     const userId = value._id;
 
     await dispatch(uploadProduct({ userId, data }));
+    
     messageApi.destroy;
     message.success("Product successfully uploaded");
     router.push("/admin");
