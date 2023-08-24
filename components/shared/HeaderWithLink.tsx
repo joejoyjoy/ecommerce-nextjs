@@ -13,11 +13,11 @@ export default function HeaderWithLink({ title, route }: Props) {
       <Link
         href={route}
         className={`inline-flex align-middle gap-2 group${
-          route === "/" ? " pointer-events-none" : ""
+          route === "none" ? " pointer-events-none" : ""
         }`}
       >
         <p className="text-lg font-semibold text-slate-2">{title}</p>
-        {route !== "/" && (
+        {route !== "none" && (
           <span className="text-slate-1 transition ease-in-out duration-500 group-hover:translate-x-2">
             <MdKeyboardArrowRight size={27} />
           </span>

@@ -8,24 +8,10 @@ import { message, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 interface Arr {
-  data: Params;
+  data: ProductState;
 }
 
-interface Params {
-  _id: string;
-  SKU: string;
-  name: string;
-  desc: string;
-  price: number;
-  image: ImageArr;
-}
-
-interface ImageArr {
-  public_id: string;
-  secure_url: string;
-}
-
-export default function ProductCard({ data }: Arr) {
+export default function ProductAdminCard({ data }: Arr) {
   const { _id, SKU, name, desc, price, image } = data;
 
   const dispatch = useDispatch<AppDispatch>();

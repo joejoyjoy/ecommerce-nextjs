@@ -8,16 +8,6 @@ import { AppDispatch } from "@/redux/store";
 import { uploadProduct } from "@/redux/features/product.slice";
 import FormProduct from "@/components/ui/FormProduct";
 
-interface IFormInput {
-  name: string;
-  desc: string;
-  price: number;
-  image: any;
-  gender: number;
-  category: string;
-  color: string;
-}
-
 export default function AdminUpload() {
   const { value } = useSelector((store: any) => store.authReducer);
   const dispatch = useDispatch<AppDispatch>();

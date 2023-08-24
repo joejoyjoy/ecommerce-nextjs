@@ -4,22 +4,19 @@ import React from "react";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "../protectedRoute";
 import { Empty } from "antd";
-import ProductCard from "@/components/shared/ProductCard";
+import ProductAdminCard from "@/components/shared/ProductAdminCard";
 
 export default function Admin() {
   const { value } = useSelector((store: any) => store.productReducer);
-
-  console.log(value);
   
   return (
     <ProtectedRoute>
       <main className="responsive">
         <span className="responsive_wrapper flex items-center justify-between py-3 mb-6">
-          {value.length !== 0 && value[0]?.image.secure_url != "" ? (
+          {value.length !== 0 && value[0].image.secure_url != "" ? (
             <div className="grid grid-cols-[repeat(5,_minmax(0,_1fr))] gap-4">
-              {value[0]?.image.secure_url != "" &&
-                value.map((product: any) => {
-                  return <ProductCard key={product.SKU} data={product} />;
+              {value?.map((product: any) => {
+                  return <ProductAdminCard key={product._id} data={product} />;
                 })}
             </div>
           ) : (

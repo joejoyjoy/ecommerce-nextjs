@@ -131,34 +131,34 @@ export const adminNavLinks = [
 export const genderOptions = [
   {
     value: 0,
-    label: "Womans Fashion",
+    label: "womens",
   },
   {
     value: 1,
-    label: "Men's Fashion",
+    label: "mens",
   },
 ];
 
 export const categoryOptions = [
   {
     value: "01",
-    label: "Men's Toque Hats",
+    label: "toque-hats",
   },
   {
     value: "02",
-    label: "Men's Flat Caps",
+    label: "flat-caps",
   },
   {
     value: "03",
-    label: "Men's Baseball Caps",
+    label: "baseball-caps",
   },
   {
     value: "04",
-    label: "Womans Summer Hats",
+    label: "summer-hats",
   },
   {
     value: "05",
-    label: "Womans Beret Hats",
+    label: "beret-hats",
   },
 ];
 

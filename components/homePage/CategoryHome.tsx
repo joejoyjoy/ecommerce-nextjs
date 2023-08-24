@@ -6,7 +6,7 @@ import HeaderWithLink from "../shared/HeaderWithLink";
 export default function CategoryHome() {
   return (
     <>
-      <HeaderWithLink title={"All our categories"} route={"/"} />
+      <HeaderWithLink title={"All our categories"} route={"none"} />
       <section className="grid grid-cols-4">
         <div className="flex col-start-1 col-span-1 aspect-square">
           <Link href={"/"} className="box-style category-cards group">

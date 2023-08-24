@@ -8,29 +8,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 type InitialState = {
   value: ProductState[] | null;
-};
-
-type ProductState = {
-  _id: string;
-  SKU: string;
-  name: string;
-  desc: string;
-  price: number;
-  image: ImageObject;
-  gender: number;
-  rating: number;
-  likes: number;
-  category: string;
-  color: string;
-  publisherId: string;
-  createdAt: any;
-  updatedAt: any;
-  __v: number;
-};
-
-type ImageObject = {
-  public_id: string;
-  secure_url: string;
+  isLoading: boolean;
 };
 
 const initialState: InitialState = {
@@ -56,17 +34,8 @@ const initialState: InitialState = {
       __v: 0,
     },
   ],
+  isLoading: true,
 };
-
-interface Props {
-  name: string;
-  desc: string;
-  price: number;
-  image: any;
-  gender: number;
-  category: string;
-  color: string;
-}
 
 interface UpdateData {
   name: string;
@@ -80,7 +49,7 @@ interface UpdateData {
 
 export const uploadProduct = createAsyncThunk(
   "product/uploadProduct",
-  async ({ userId, data }: { userId: string; data: Props }) => {
+  async ({ userId, data }: { userId: string; data: IFormInput }) => {
     const response = await publishProduct(userId, data);
     return response;
   }
@@ -136,6 +105,7 @@ export const product = createSlice({
       if (state.value != null) {
         state.value = action.payload;
       }
+      state.isLoading = false;
     });
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       if (state.value != null) {

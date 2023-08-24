@@ -15,15 +15,6 @@ import {
   generateNumber,
 } from "@/utils/generateFakeValue";
 
-interface Props {
-  name: string;
-  desc: string;
-  price: number;
-  image: any;
-  gender: number;
-  category: string;
-  color: string;
-}
 interface UpdateData {
   name: string;
   desc: string;
@@ -33,29 +24,6 @@ interface UpdateData {
   color: string;
   id: string;
 }
-
-type ProductState = {
-  _id: string;
-  SKU: string;
-  name: string;
-  desc: string;
-  price: number;
-  image: ImageObject;
-  gender: number;
-  rating: number;
-  likes: number;
-  category: string;
-  color: string;
-  publisherId: string;
-  createdAt: any;
-  updatedAt: any;
-  __v: number;
-};
-
-type ImageObject = {
-  public_id: string;
-  secure_url: string;
-};
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -129,7 +97,7 @@ async function uploadPhoto(formData: any) {
 
 export async function publishProduct(
   userId: string,
-  { name, desc, price, image, gender, category, color }: Props
+  { name, desc, price, image, gender, category, color }: IFormInput
 ) {
   connectToDB();
 

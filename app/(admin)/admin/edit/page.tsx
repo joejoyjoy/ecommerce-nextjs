@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { ConfigProvider, message } from "antd";
@@ -10,39 +9,7 @@ import { AppDispatch } from "@/redux/store";
 import { updateProduct } from "@/redux/features/product.slice";
 import FormProduct from "@/components/ui/FormProduct";
 import { findProductById } from "@/lib/actions/product.actions";
-
-interface IFormInput {
-  name: string;
-  desc: string;
-  price: number;
-  image: any;
-  gender: number;
-  category: string;
-  color: string;
-}
-
-type ProductState = {
-  _id: string;
-  SKU: string;
-  name: string;
-  desc: string;
-  price: number;
-  image: ImageObject;
-  gender: number;
-  rating: number;
-  likes: number;
-  category: string;
-  color: string;
-  publisherId: string;
-  createdAt: any;
-  updatedAt: any;
-  __v: number;
-};
-
-type ImageObject = {
-  public_id: string;
-  secure_url: string;
-};
+import IsLoadingComponent from "@/components/ui/IsLoadingComponent";
 
 interface UpdateData {
   name: string;
@@ -120,17 +87,7 @@ export default function AdminEdit() {
   }, [isLoading]);
 
   if (isRedirecting) {
-    return (
-      <div className="flex justify-center items-center absolute top-0 left-0 right-0 bottom-0 h-screen w-screen bg-inherit z-50">
-        <Image
-          src={"/assets/GIF/pageLoad.gif"}
-          alt="Loading animation"
-          width={64}
-          height={64}
-          priority
-        />
-      </div>
-    );
+    return <IsLoadingComponent />
   }
 
   return (

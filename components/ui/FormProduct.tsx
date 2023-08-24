@@ -7,39 +7,7 @@ import Image from "next/image";
 import { PiPlus } from "react-icons/pi";
 import { DeleteOutlined } from "@ant-design/icons";
 import { colorOptions, optionsCascader } from "@/constants";
-
-interface IFormInput {
-  name: string;
-  desc: string;
-  price: number;
-  image: any;
-  gender: number;
-  category: string;
-  color: string;
-}
-
-type ProductState = {
-  _id: string;
-  SKU: string;
-  name: string;
-  desc: string;
-  price: number;
-  image: ImageObject;
-  gender: number;
-  rating: number;
-  likes: number;
-  category: string;
-  color: string;
-  publisherId: string;
-  createdAt: any;
-  updatedAt: any;
-  __v: number;
-};
-
-type ImageObject = {
-  public_id: string;
-  secure_url: string;
-};
+import IsLoadingComponent from "./IsLoadingComponent";
 
 export default function FormProduct({
   purpose,
@@ -143,17 +111,7 @@ export default function FormProduct({
   };
 
   if (purpose != "upload" && dataProduct?.name === "") {
-    return (
-      <div className="flex justify-center items-center absolute top-0 left-0 right-0 bottom-0 h-screen w-screen bg-inherit z-50">
-        <Image
-          src={"/assets/GIF/pageLoad.gif"}
-          alt="Loading animation"
-          width={64}
-          height={64}
-          priority
-        />
-      </div>
-    );
+    return <IsLoadingComponent />;
   }
 
   return (
