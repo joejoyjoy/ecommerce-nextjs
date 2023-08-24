@@ -164,6 +164,26 @@ export const categoryOptions = [
 
 export const colorOptions = [
   {
+    value: "black",
+    label: "Black",
+  },
+  {
+    value: "white",
+    label: "White",
+  },
+  {
+    value: "gray",
+    label: "Gray",
+  },
+  {
+    value: "brown",
+    label: "Brown",
+  },
+  {
+    value: "beige",
+    label: "Beige",
+  },
+  {
     value: "red",
     label: "Red",
   },

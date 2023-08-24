@@ -175,7 +175,7 @@ export default function FormProduct({
                   required: true,
                   minLength: 10,
                   maxLength: 50,
-                  pattern: /^[A-Za-z0-9\s,.%|·]*$/i,
+                  pattern: /^[A-Za-z0-9\s,.%|&·\-]*$/i,
                 })}
                 id="product_name"
                 placeholder="LA Dodgers League Essential"
@@ -349,7 +349,7 @@ export default function FormProduct({
               required: true,
               maxLength: 750,
               minLength: 110,
-              pattern: /^[A-Za-z0-9\s,.%|·]+$/i,
+              pattern: /^[A-Za-z0-9\s,.%|&·\-]+$/i,
             })}
             defaultValue={purpose != "upload" ? dataProduct?.desc : undefined}
             id="product_desc"
