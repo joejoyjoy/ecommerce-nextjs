@@ -21,7 +21,7 @@ export default function HeadWearPage() {
     <main className="responsive">
       <span className="responsive_wrapper flex flex-col px-7 mb-6">
         <HeaderWithLink title={"Back To Home"} route={"/"} />
-        {value.length !== 0 && value[0].image.secure_url != "" ? (
+        {value.length !== 0 ? (
           <section className="grid grid-cols-5 gap-4 mt-2">
             {randomMap(value)?.map((product: any) => {
               return <ProductHomeCard key={product._id} data={product} />;

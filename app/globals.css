@@ -97,3 +97,9 @@
 .ant-popconfirm-description {
   font-weight: 400 !important;
 }
+
+.ant-breadcrumb-overlay-link {
+  display: flex !important;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.45) !important;
+}

@@ -30,7 +30,7 @@ export default function AllProductsHome() {
   return (
     <>
       <HeaderWithLink title={"All Products"} route={"/headwear"} />
-      {value.length !== 0 && value[0].image.secure_url != "" ? (
+      {value.length !== 0 ? (
         <section className="grid grid-cols-5 gap-4 px-3 mt-2">
           {randomMap(value)?.map((product: any) => {
             return <ProductHomeCard key={product._id} data={product} />;

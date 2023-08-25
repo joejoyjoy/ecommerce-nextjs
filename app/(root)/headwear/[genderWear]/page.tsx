@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 import { useSelector } from "react-redux";
-import HeaderWithLink from "@/components/shared/HeaderWithLink";
-import { Empty } from "antd";
+import { Empty, Button, Result, Breadcrumb } from "antd";
 import ProductHomeCard from "@/components/shared/ProductHomeCard";
 import { randomMap } from "@/utils/randomMap";
 import IsLoadingComponent from "@/components/ui/IsLoadingComponent";
 import { genderOptions } from "@/constants";
+import { menuGender } from "./menuLinks";
+import { formatUriLabel } from "@/utils/formatUriLabel";
 
 interface pageProps {
   params: { genderWear: string };
@@ -41,8 +42,30 @@ export default function GenderWearPage({ params }: pageProps) {
     return (
       <main className="responsive">
         <span className="responsive_wrapper flex flex-col px-7 mb-6">
-          <HeaderWithLink title={"Back To All Head Wear"} route={"/headware"} />
-          {value.length !== 0 && value[0].image.secure_url != "" ? (
+          <div className="mt-3 mb-1">
+            <Breadcrumb
+              items={[
+                {
+                  title: <Link href="/">Home</Link>,
+                },
+                {
+                  title: <Link href="/headwear">Head Wear</Link>,
+                },
+                {
+                  title: (
+                    <Link
+                      href={`/headwear/${params.genderWear}`}
+                      className="capitalize"
+                    >
+                      {formatUriLabel(params != null ? params.genderWear : "")}
+                    </Link>
+                  ),
+                  menu: { items: menuGender() },
+                },
+              ]}
+            />
+          </div>
+          {value.length !== 0 ? (
             <section className="grid grid-cols-5 gap-4 mt-2">
               {randomMap(value)?.map((product: any) => {
                 if (product.gender == genderId) {
@@ -60,5 +83,20 @@ export default function GenderWearPage({ params }: pageProps) {
     );
   }
 
-  return redirect("/headwear");
+  return (
+    <main className="responsive">
+      <span className="responsive_wrapper flex flex-col justify-center px-7 mb-6">
+        <Result
+          status="404"
+          title="404"
+          subTitle="Sorry, the page you visited does not exist."
+          extra={
+            <Button type="primary" href="/headware">
+              Back To All categories
+            </Button>
+          }
+        />
+      </span>
+    </main>
+  );
 }

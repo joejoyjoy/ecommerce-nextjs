@@ -128,14 +128,44 @@ export const adminNavLinks = [
   },
 ];
 
-export const genderOptions = [
+export interface GenderOptions {
+  value: string | number;
+  label: string;
+  children?: GenderOptions[];
+}
+
+export const genderOptions: GenderOptions[] = [
   {
     value: 0,
     label: "womens",
+    children: [
+      {
+        value: "04",
+        label: "summer-hats",
+      },
+      {
+        value: "05",
+        label: "beret-hats",
+      },
+    ],
   },
   {
     value: 1,
     label: "mens",
+    children: [
+      {
+        value: "01",
+        label: "toque-hats",
+      },
+      {
+        value: "02",
+        label: "flat-caps",
+      },
+      {
+        value: "03",
+        label: "baseball-caps",
+      },
+    ],
   },
 ];
 
