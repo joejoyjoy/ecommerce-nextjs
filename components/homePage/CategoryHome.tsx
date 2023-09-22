@@ -9,7 +9,10 @@ export default function CategoryHome() {
       <HeaderWithLink title={"All our categories"} route={"none"} />
       <section className="grid grid-cols-4">
         <div className="flex col-start-1 col-span-1 aspect-square">
-          <Link href={"/"} className="box-style category-cards group">
+          <Link
+            href={"/headwear/mens/toque-hats"}
+            className="box-style category-cards group"
+          >
             <Image
               src={"/assets/IMG/toque-hat-category.jpg"}
               alt="Man in snow with toque hat"
@@ -32,7 +35,10 @@ export default function CategoryHome() {
           </Link>
         </div>
         <div className="flex col-start-2 col-span-2 aspect-[2/1]">
-          <Link href={"/"} className="box-style category-cards group">
+          <Link
+            href={"/headwear/mens/flat-caps"}
+            className="box-style category-cards group"
+          >
             <Image
               src={"/assets/IMG/flat-cap-category.jpg"}
               alt="Hello"
@@ -55,7 +61,10 @@ export default function CategoryHome() {
           </Link>
         </div>
         <div className="flex row-span-2 aspect-[1/2]">
-          <Link href={"/"} className="box-style category-cards group">
+          <Link
+            href={"/headwear/mens/baseball-caps"}
+            className="box-style category-cards group"
+          >
             <Image
               src={"/assets/IMG/baseball-cap-category.jpg"}
               alt="Hello"
@@ -78,7 +87,10 @@ export default function CategoryHome() {
           </Link>
         </div>
         <div className="flex col-start-1 col-span-2 aspect-[2/1]">
-          <Link href={"/"} className="box-style category-cards group">
+          <Link
+            href={"/headwear/womens/summer-hats"}
+            className="box-style category-cards group"
+          >
             <Image
               src={"/assets/IMG/hat-category.jpg"}
               alt="Hello"
@@ -101,7 +113,10 @@ export default function CategoryHome() {
           </Link>
         </div>
         <div className="flex col-span-1 col-start-3 aspect-square">
-          <Link href={"/"} className="box-style category-cards group">
+          <Link
+            href={"/headwear/womens/beret-hats"}
+            className="box-style category-cards group"
+          >
             <Image
               src={"/assets/IMG/beret-category.jpg"}
               alt="Hello"

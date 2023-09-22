@@ -10,12 +10,8 @@ export default function ProductState({
 }: {
   children: React.ReactNode;
 }) {
-  const { isLoading, isLoggedIn } = useSelector(
-    (store: any) => store.authReducer
-  );
-  const { value } = useSelector(
-    (store: any) => store.productReducer
-  );
+  const { isLoading } = useSelector((store: any) => store.authReducer);
+  const { value } = useSelector((store: any) => store.productReducer);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -23,7 +19,7 @@ export default function ProductState({
       const res = await dispatch(findAllProducts());
       return res;
     };
-    if (!isLoading && isLoggedIn) {
+    if (!isLoading) {
       allProducts();
     }
   }, [isLoading, value.length]);

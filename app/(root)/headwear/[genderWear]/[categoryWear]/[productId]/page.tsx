@@ -21,6 +21,7 @@ interface pageProps {
 
 export default function CategoryWearPage({ params }: pageProps) {
   const [paramsExist, setParamsExist] = useState(false);
+  const [doneLoading, setDoneLoading] = useState(false);
   const { isLoading } = useSelector((store: any) => store.productReducer);
   const [productData, setProductData] = useState<ProductState>({
     _id: "",
@@ -48,10 +49,11 @@ export default function CategoryWearPage({ params }: pageProps) {
     async function findProductOfParams(productId: string) {
       const result = await findProductById(productId);
       if (result === "REDIRECT") {
-        return;
+        return setDoneLoading(true);
       }
       setProductData(result);
       setParamsExist(true);
+      setDoneLoading(true);
     }
     findProductOfParams(params.productId);
   }, [isLoading]);
@@ -60,7 +62,7 @@ export default function CategoryWearPage({ params }: pageProps) {
     return <IsLoadingComponent />;
   }
 
-  if (!paramsExist) {
+  if (doneLoading && !paramsExist) {
     return (
       <main className="responsive">
         <span className="responsive_wrapper flex flex-col justify-center px-7 mb-6">

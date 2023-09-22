@@ -25,6 +25,7 @@ module.exports = {
       },
       boxShadow: {
         "3xl": "0 4px 20px 0 rgb(25 25 34/24%);",
+        "4xl": "0 10px 10px -5px rgba(0, 0, 0, 0.2)"
       },
       animation: {
         bounce: "bounce 0.25s",

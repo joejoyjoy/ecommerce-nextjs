@@ -36,19 +36,7 @@
     @apply text-xl font-light text-center transition ease-in-out scale-125 duration-500;
   }
 
-  /*** SPECIFIC STYLE CLASSES ***/
-  .popper-active {
-    @apply opacity-100 pointer-events-auto -translate-y-2 transition duration-200;
-  }
-
-  .popper-inactive {
-    @apply opacity-0 pointer-events-none z-10 -translate-y-5 transition duration-200;
-  }
-
-  .animated-button {
-    @apply transition ease-in-out active:scale-105 focus:outline-none focus:ring duration-200;
-  }
-
+  /*** FORM COMPONENT ***/
   .label-form {
     @apply inline-block mb-2 text-sm font-medium text-gray-900;
   }
@@ -71,6 +59,49 @@
 
   .required-input-form {
     @apply ml-1 text-lg font-bold text-red-500;
+  }
+
+  /*** PRODUCT BUTTONS ***/
+  .custom-icons {
+    @apply bg-gray-400 h-12 w-12 rounded-2xl flex justify-center items-center shadow-4xl;
+  }
+
+  .custom-icons svg {
+    color: #fff;
+    width: 25px;
+    height: 25px;
+  }
+
+  .icon-ship {
+    @apply custom-icons;
+    background: radial-gradient(circle at center top, #f4a399 15px, #f76451);
+  }
+
+  .icon-price {
+    @apply custom-icons;
+    background: radial-gradient(circle at center top, #73acf8 15px, #4785f2);
+  }
+
+  .icon-secure {
+    @apply custom-icons;
+    background: radial-gradient(circle at center top, #90e2b5 15px, #46c977);
+  }
+
+  /*** SPECIFIC STYLE CLASSES ***/
+  .popper-active {
+    @apply opacity-100 pointer-events-auto -translate-y-2 transition duration-200;
+  }
+
+  .popper-inactive {
+    @apply opacity-0 pointer-events-none z-10 -translate-y-5 transition duration-200;
+  }
+
+  .animated-button {
+    @apply transition ease-in-out active:scale-105 focus:outline-none focus:ring duration-200;
+  }
+
+  .hr-style {
+    @apply h-full w-px bg-gray-200 border-0;
   }
 }
 
