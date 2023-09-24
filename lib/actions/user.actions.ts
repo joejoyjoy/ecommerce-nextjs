@@ -52,3 +52,27 @@ export async function updateUserLastSingIn(user: any) {
     throw new Error(`Failed to update user last sign-in: ${error.message}`);
   }
 }
+
+export async function getUserById({ userId }: { userId: string }) {
+  connectToDB();
+
+  try {
+    const user = await User.findById(userId);
+    
+    if (user !== null) {
+      return JSON.parse(JSON.stringify(user));
+    }
+
+    return JSON.parse(
+      JSON.stringify({
+        error: {
+          message: "No matching user with given Id",
+        },
+      })
+    );
+  } catch (error: any) {
+    throw new Error(
+      `Failed to create/update user by checkUser Fn(): ${error.message}`
+    );
+  }
+}

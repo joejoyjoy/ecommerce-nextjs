@@ -1,14 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import { formatAsEuro } from "@/utils/formatAsEuro";
+import { ProductBenefits, ProductUploader } from "./ProductDetailsComponents";
 import { GiRoundStar } from "react-icons/gi";
 import { TbSquareRoundedPlus } from "react-icons/tb";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { PiHeartBold } from "react-icons/pi";
-import { LiaShippingFastSolid } from "react-icons/lia";
-import { MdOutlineAttachMoney } from "react-icons/md";
-import { RiSecurePaymentLine } from "react-icons/ri";
 
-function ProductDetails({ data }: { data: ProductState }) {
+export default function ProductDetails({ data }: { data: ProductState }) {
   const {
     _id,
     SKU,
@@ -48,7 +47,7 @@ function ProductDetails({ data }: { data: ProductState }) {
         <p className="text-sm font-semibold text-slate-2 mt-2">{desc}</p>
         <p className="capitalize mt-7">Color: {color}</p>
         <p className="font-bold mt-7">ONE SIZE, FITS MOST</p>
-        <p className="text-2xl font-bold mt-7">€59.00</p>
+        <p className="text-2xl font-bold mt-7">{formatAsEuro(price)}</p>
         <div className="flex gap-6 mt-7">
           <div className="flex items-center gap-3 px-2 py-4 bg-gray-0 rounded-2xl text-sm text-gray-05">
             <button>
@@ -68,41 +67,8 @@ function ProductDetails({ data }: { data: ProductState }) {
           </button>
         </div>
       </div>
-      <div className="flex justify-between bg-gray-0 p-5 rounded-2xl">
-        <button className="w-9 h-9 p-0 rounded-full drop-shadow-md z-50">
-          <Image
-            src={"/assets/IMG/profile-placeholder-160x160.webp"}
-            alt={"User profile picture"}
-            width={36}
-            height={36}
-            className="rounded-full w-9 h-9 object-cover"
-          />
-        </button>
-      </div>
-      <div className="flex justify-between bg-gray-0 p-5 rounded-2xl">
-        <div className="flex items-center gap-3">
-          <div className="icon-ship">
-            <LiaShippingFastSolid />
-          </div>
-          <p className="inline font-bold text-sm">Free shipping</p>
-        </div>
-        <hr className="hr-style" />
-        <div className="flex items-center gap-3">
-          <div className="icon-price">
-            <MdOutlineAttachMoney />
-          </div>
-          <p className="inline font-bold text-sm">A fair price</p>
-        </div>
-        <hr className="hr-style" />
-        <div className="flex items-center gap-3">
-          <div className="icon-secure">
-            <RiSecurePaymentLine />
-          </div>
-          <p className="inline font-bold text-sm">Secure Payment</p>
-        </div>
-      </div>
+      <ProductUploader userId={publisherId} />
+      <ProductBenefits />
     </section>
   );
 }
-
-export default ProductDetails;
